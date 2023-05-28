@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YouTube Ad Filter</title>
+    <style>
+      body {
+        width: 300px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>YouTube Ad Filter</h1>
+    <button id="toggleButton">Toggle Extension</button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', function () {
+          chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, 'toggle_extension');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
